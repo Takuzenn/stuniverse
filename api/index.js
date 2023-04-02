@@ -26,9 +26,17 @@ app.use(cookieParser());
 app.use('/uploads', express.static(__dirname+'/uploads'));
 app.use(cors({
   credentials: true,
-  origin: 'https://stuniverse.vercel.app',
+  origin: 'https://stuniverse-b4qe25efg-l2579904133-gmailcom.vercel.app',
   // origin: 'http://localhost:5173',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  headers: 'Content-Type, Authorization'
 }));
+
+// app.use(cors({
+//   credentials: true,
+//   origin: 'https://stuniverse.vercel.app',
+//   // origin: 'http://localhost:5173',
+// }));
 
 async function uploadToS3(path, originalFilename, mimetype) {
   const client = new S3Client({
