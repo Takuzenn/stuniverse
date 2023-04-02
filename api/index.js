@@ -26,11 +26,19 @@ app.use(cookieParser());
 app.use('/uploads', express.static(__dirname+'/uploads'));
 app.use(cors({
   credentials: true,
-  origin: 'https://stuniverse-b4qe25efg-l2579904133-gmailcom.vercel.app',
-  // origin: 'http://localhost:5173',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  headers: 'Content-Type, Authorization'
+  origin: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  exposedHeaders: ['Content-Length', 'Authorization'],
 }));
+
+// app.use(cors({
+//   credentials: true,
+//   origin: 'https://stuniverse-b4qe25efg-l2579904133-gmailcom.vercel.app',
+//   // origin: 'http://localhost:5173',
+//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+//   headers: 'Content-Type, Authorization'
+// }));
 
 // app.use(cors({
 //   credentials: true,
