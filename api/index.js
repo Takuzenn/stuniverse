@@ -12,6 +12,7 @@ const {S3Client, PutObjectCommand} = require('@aws-sdk/client-s3');
 const multer = require('multer');
 const fs = require('fs');
 const mime = require('mime-types');
+const corsMiddleware = require('./cors');
 
 
 require('dotenv').config();
@@ -21,16 +22,20 @@ const bcryptSalt = bcrypt.genSaltSync(10);
 const jwtSecret = 'fasefraw4r5r3wq45wdfgw34twdfg';
 const bucket = 'stuniverse';
 
+
 app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname+'/uploads'));
-app.use(cors({
-  credentials: true,
-  origin: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  exposedHeaders: ['Content-Length', 'Authorization'],
-}));
+
+app.use(corsMiddleware);
+
+// app.use(cors({
+//   credentials: true,
+//   origin: true,
+//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+//   allowedHeaders: ['Content-Type', 'Authorization'],
+//   exposedHeaders: ['Content-Length', 'Authorization'],
+// }));
 
 // app.use(cors({
 //   credentials: true,
@@ -91,7 +96,7 @@ app.get('/api/test', (req,res) => {
 app.post('/api/register', async (req,res) => {
   mongoose.connect('mongodb+srv://l2579904133:Ll352513@cluster0.wedn4mq.mongodb.net/?retryWrites=true&w=majority');
   const {name,email,password} = req.body;
-  res.json({name,email,password})
+  // res.json({name,email,password})
   // res.json(userDoc);
 
   try {
