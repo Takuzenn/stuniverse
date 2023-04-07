@@ -92,7 +92,7 @@ app.post('/api/register', async (req,res) => {
   mongoose.connect('mongodb+srv://l2579904133:Ll352513@cluster0.wedn4mq.mongodb.net/?retryWrites=true&w=majority');
   const {name,email,password} = req.body;
   res.json({name,email,password})
-  res.json(userDoc);
+  // res.json(userDoc);
 
   try {
     const userDoc = await User.create({
