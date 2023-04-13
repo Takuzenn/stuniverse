@@ -33,7 +33,7 @@ export default function IndexPage() {
                 <h2 className="font-bold text-white">{place.address}</h2>
                 <h3 className="text-sm text-white">{place.title.length > 25 ? place.title.slice(0, 25) + "..." : place.title}</h3>
                 <div className="mt-1">
-                  <span className="font-bold">${place.price}</span> per night
+                  <span className="font-bold text-white">${place.price}</span> per night
                 </div>
               </div>
             </Link>
