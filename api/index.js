@@ -243,11 +243,12 @@ app.post('/api/bookings', async (req, res) => {
   mongoose.connect('mongodb+srv://l2579904133:Ll352513@cluster0.wedn4mq.mongodb.net/?retryWrites=true&w=majority');
   const userData = await getUserDataFromReq(req);
   const {
-    place,checkIn,checkOut,numberOfGuests,name,phone,price,
+    place, checkIn, selectedTime, numberOfHours, name, phone, price,
   } = req.body;
+
   Booking.create({
-    place,checkIn,checkOut,numberOfGuests,name,phone,price,
-    user:userData.id,
+    place, checkIn, selectedTime, numberOfHours, name, phone, price,
+    user: userData.id,
   }).then((doc) => {
     res.json(doc);
   }).catch((err) => {

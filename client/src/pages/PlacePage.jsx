@@ -25,7 +25,7 @@ export default function PlacePage() {
 
 
   return (
-    <div className="mt-4 bg-gray-100 -mx-8 px-8 pt-8">
+    <div className="mt-4 bg-white -mx-8 px-8 pt-8">
       {isLoading ? (
         <div className="flex justify-center items-center h-screen">
           <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
@@ -50,12 +50,12 @@ export default function PlacePage() {
               <BookingWidget place={place} />
             </div>
           </div>
-          <div className="bg-white -mx-8 px-8 py-8 border-t">
+          {/* <div className="bg-white -mx-8 px-8 py-8 border-t">
             <div>
               <h2 className="font-semibold text-2xl">Extra info</h2>
             </div>
             <div className="mb-4 mt-2 text-sm text-gray-700 leading-5">{place.extraInfo}</div>
-          </div>
+          </div> */}
       </div>
       )}
     </div>
