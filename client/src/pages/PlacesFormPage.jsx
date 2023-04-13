@@ -38,7 +38,7 @@ export default function PlacesFormPage() {
   }, [id]);
   function inputHeader(text) {
     return (
-      <h2 className="text-2xl mt-4">{text}</h2>
+      <h2 className="text-2xl mt-4 text-white">{text}</h2>
     );
   }
   function inputDescription(text) {
@@ -101,31 +101,31 @@ export default function PlacesFormPage() {
         {preInput('Check in&out times','add check in and out times, remember to have some time window for cleaning the room between guests')}
         <div className="grid gap-2 grid-cols-2 md:grid-cols-4">
           <div>
-            <h3 className="mt-2 -mb-1">Earliest business time</h3>
+            <h3 className="mt-2 -mb-1 text-white">Earliest business time</h3>
             <input type="text"
                    value={checkIn}
                    onChange={ev => setCheckIn(ev.target.value)}
                    placeholder="09:00"/>
           </div>
           <div>
-            <h3 className="mt-2 -mb-1">latest business time</h3>
+            <h3 className="mt-2 -mb-1 text-white">latest business time</h3>
             <input type="text"
                    value={checkOut}
                    onChange={ev => setCheckOut(ev.target.value)}
                    placeholder="23:00" />
           </div>
           <div>
-            <h3 className="mt-2 -mb-1">Max number of guests</h3>
+            <h3 className="mt-2 -mb-1 text-white">Max number of guests</h3>
             <input type="number" value={maxGuests}
                    onChange={ev => setMaxGuests(ev.target.value)}/>
           </div>
           <div>
-            <h3 className="mt-2 -mb-1">Price per hour</h3>
+            <h3 className="mt-2 -mb-1 text-white">Price per hour</h3>
             <input type="number" value={price}
                    onChange={ev => setPrice(ev.target.value)}/>
           </div>
         </div>
-        <button className="primary my-4">Save</button>
+        <button className="primary my-4 text-white">Save</button>
       </form>
     </div>
   );

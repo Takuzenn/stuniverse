@@ -100,12 +100,12 @@ export default function BookingWidget({place}) {
           </div>
         )}
       </div>
-      <div>{selectedTime}</div>
+      {/* <div>{selectedTime}</div> */}
       <button onClick={bookThisPlace} className="primary mt-4">
-        Book this place
-        {numberOfHours > 0 && (
+        Book now
+        {/* {numberOfHours > 0 && (
           <span> ${numberOfHours * place.price}</span>
-        )}
+        )} */}
       </button>
     </div>
   );
