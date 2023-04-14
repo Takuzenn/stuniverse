@@ -98,7 +98,7 @@ export default function PlacesFormPage() {
         </div>
         {/* {preInput('Extra info','house rules, etc')}
         <textarea value={extraInfo} onChange={ev => setExtraInfo(ev.target.value)} /> */}
-        {preInput('Check in&out times','add check in and out times, remember to have some time window for cleaning the room between guests')}
+        {preInput('Earliest & lattest business times','add check in and out times, remember to have some time window for cleaning the room between guests')}
         <div className="grid gap-2 grid-cols-2 md:grid-cols-4">
           <div>
             <h3 className="mt-2 -mb-1 text-white">Earliest business time</h3>
