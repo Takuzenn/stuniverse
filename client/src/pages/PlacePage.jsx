@@ -52,6 +52,8 @@ export default function PlacePage() {
   const [place,setPlace] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  axios.defaults.withCredentials = true;
+
   useEffect(() => {
     if (!id) {
       return;
