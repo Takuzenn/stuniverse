@@ -29,13 +29,13 @@ app.use('/uploads', express.static(__dirname+'/uploads'));
 
 app.use(corsMiddleware);
 
-// app.use(cors({
-//   credentials: true,
-//   origin: true,
-//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-//   allowedHeaders: ['Content-Type', 'Authorization'],
-//   exposedHeaders: ['Content-Length', 'Authorization'],
-// }));
+app.use(cors({
+  credentials: true,
+  origin: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  exposedHeaders: ['Content-Length', 'Authorization'],
+}));
 
 // app.use(cors({
 //   credentials: true,
@@ -74,12 +74,17 @@ async function uploadToS3(path, originalFilename, mimetype) {
 
 function getUserDataFromReq(req) {
   return new Promise((resolve, reject) => {
-    jwt.verify(req.cookies.token, jwtSecret, {}, async (err, userData) => {
-      if (err) throw err;
+    const token = req.cookies.token;
+    if (!token) {
+      return reject(new Error('JWT token not provided'));
+    }
+    jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+      if (err) return reject(err);
       resolve(userData);
     });
   });
 }
+
 
 console.log(process.env.MONGO_URL)
 mongoose.set('strictQuery', true);
@@ -258,10 +263,15 @@ app.post('/api/bookings', async (req, res) => {
 
 
 
-app.get('/api/bookings', async (req,res) => {
+app.get('/api/bookings', async (req, res) => {
   mongoose.connect('mongodb+srv://l2579904133:Ll352513@cluster0.wedn4mq.mongodb.net/?retryWrites=true&w=majority');
-  const userData = await getUserDataFromReq(req);
-  res.json( await Booking.find({user:userData.id}).populate('place') );
+  try {
+    const userData = await getUserDataFromReq(req);
+    res.json(await Booking.find({ user: userData.id }).populate('place'));
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 });
+
 
 app.listen(4000);
