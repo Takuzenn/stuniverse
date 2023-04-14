@@ -76,7 +76,7 @@ function getUserDataFromReq(req) {
   return new Promise((resolve, reject) => {
     const token = req.cookies.token;
     if (!token) {
-      return reject(new Error('JWT token not provided'));
+      return reject({ message: 'JWT token not provided', customError: true });
     }
     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
       if (err) return reject(err);
@@ -84,6 +84,7 @@ function getUserDataFromReq(req) {
     });
   });
 }
+
 
 
 console.log(process.env.MONGO_URL)
@@ -269,9 +270,14 @@ app.get('/api/bookings', async (req, res) => {
     const userData = await getUserDataFromReq(req);
     res.json(await Booking.find({ user: userData.id }).populate('place'));
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    if (error.customError) {
+      res.status(400).json({ error: error.message });
+    } else {
+      res.status(500).json({ error: 'Internal server error' });
+    }
   }
 });
+
 
 
 app.listen(4000);
